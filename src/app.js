@@ -1,15 +1,18 @@
 const express = require("express");
 
+const expenseRoutes = require("./routes/expense.routes");
+
 const app = express();
 
 app.use(express.json());
 
-// Health Check Route
 app.get("/", (req, res) => {
-    res.status(200).json({
+    res.json({
         success: true,
-        message: "Smart Expense Tracker API is running."
+        message: "Smart Expense Tracker API is running 🚀"
     });
 });
+
+app.use("/expenses", expenseRoutes);
 
 module.exports = app;
