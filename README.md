@@ -1,19 +1,19 @@
 # Smart Expense Tracker API
 
-A RESTful Expense Tracker API built using **Node.js** and **Express.js** as part of the **Diligent Software Engineering Apprenticeship Assignment**.
+A RESTful Expense Tracker API built using **Node.js** and **Express.js** for the **Diligent Software Engineering Apprenticeship 2026 Take-Home Assignment**.
 
 ## Features
 
 - Add a new expense
-- Retrieve all expenses
+- View all expenses
 - Filter expenses by category
-- Get total expense summary
-- Get category-wise expense summary
+- Calculate total expenses
+- Calculate total expenses by category
 - Delete an expense
-- Request validation
+- Input validation using Express Validator
 - Centralized error handling
-- Swagger API documentation
-- Automated testing with Jest & Supertest
+- OpenAPI (Swagger) documentation
+- Automated tests using Jest and Supertest
 
 ---
 
@@ -23,6 +23,7 @@ A RESTful Expense Tracker API built using **Node.js** and **Express.js** as part
 - Express.js
 - JavaScript
 - Express Validator
+- UUID
 - Swagger (OpenAPI)
 - Jest
 - Supertest
@@ -32,32 +33,45 @@ A RESTful Expense Tracker API built using **Node.js** and **Express.js** as part
 ## Project Structure
 
 ```
-src/
-├── config/
-├── controllers/
-├── middlewares/
-├── models/
-├── repositories/
-├── routes/
-├── services/
-├── utils/
-├── validators/
-├── app.js
-└── server.js
-
-tests/
-README.md
-AI_NOTES.md
+your-repo/
+│
+├── README.md
+├── AI_NOTES.md
+├── package.json
+├── package-lock.json
+├── .gitignore
+│
+├── src/
+│   ├── app.js
+│   ├── server.js
+│   ├── config/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── repositories/
+│   ├── routes/
+│   ├── services/
+│   ├── utils/
+│   └── validators/
+│
+└── tests/
+    └── expense.test.js
 ```
 
 ---
 
-## Installation
+# Installation
 
 Clone the repository
 
 ```bash
 git clone <repository-url>
+```
+
+Move into the project directory
+
+```bash
+cd <repository-folder>
 ```
 
 Install dependencies
@@ -66,10 +80,20 @@ Install dependencies
 npm install
 ```
 
-Run the server
+---
+
+# Run the Server
+
+Development mode
 
 ```bash
 npm run dev
+```
+
+or
+
+```bash
+npm start
 ```
 
 Server runs on
@@ -80,15 +104,7 @@ http://localhost:3000
 
 ---
 
-## Swagger Documentation
-
-```
-http://localhost:3000/api-docs
-```
-
----
-
-## Running Tests
+# Run Tests
 
 ```bash
 npm test
@@ -96,26 +112,67 @@ npm test
 
 ---
 
-## API Endpoints
+# API Documentation
+
+Swagger UI
+
+```
+http://localhost:3000/api-docs
+```
+
+---
+
+# API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | / | Health Check |
 | POST | /expenses | Add Expense |
-| GET | /expenses | Get All Expenses |
+| GET | /expenses | View All Expenses |
 | GET | /expenses?category=Food | Filter by Category |
-| GET | /expenses/summary | Total Summary |
+| GET | /expenses/summary | Overall Expense Summary |
 | GET | /expenses/summary?category=Food | Category Summary |
 | DELETE | /expenses/:id | Delete Expense |
 
 ---
 
-## Bonus Feature
+# Bonus Feature Implemented
 
-OpenAPI / Swagger Documentation
+**OpenAPI (Swagger) Documentation**
+
+Interactive API documentation is available through Swagger UI.
 
 ---
 
-## Author
+# Testing
+
+Automated API tests have been written using:
+
+- Jest
+- Supertest
+
+The tests cover:
+
+- API health check
+- Expense creation
+- Validation failures
+- View expenses
+- Category filtering
+- Expense summary
+- Category summary
+- Delete expense
+- Delete invalid expense
+
+---
+
+# Assumptions
+
+- Data is stored in memory as per the assignment instructions.
+- Expense IDs are generated automatically using UUID.
+- Data will reset whenever the server restarts.
+
+---
+
+# Author
 
 Sejal Bhole
