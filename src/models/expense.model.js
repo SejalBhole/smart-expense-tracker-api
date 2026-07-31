@@ -15,8 +15,10 @@ function createExpense(expenseData) {
         id: uuidv4(),
         title: expenseData.title.trim(),
         amount: Number(expenseData.amount),
-        category: expenseData.category,
-        date: expenseData.date
+        category: expenseData.category.trim(),
+        date: new Date(expenseData.date)
+    .toISOString()
+    .split("T")[0]
     };
 }
 

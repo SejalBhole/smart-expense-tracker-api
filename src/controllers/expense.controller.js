@@ -1,52 +1,79 @@
 const expenseService = require("../services/expense.service");
 
-function addExpense(req, res) {
-    const expense = expenseService.addExpense(req.body);
+async function addExpense(req, res, next) {
+    try {
+        const expense = await expenseService.addExpense(req.body);
 
-    return res.status(201).json({
-        success: true,
-        message: "Expense added successfully.",
-        data: expense
-    });
-}
-
-function getExpenses(req, res) {
-    const { category } = req.query;
-
-    const expenses = expenseService.getExpenses(category);
-
-    return res.status(200).json({
-        success: true,
-        data: expenses
-    });
-}
-
-function getExpenseSummary(req, res) {
-    const { category } = req.query;
-
-    const summary = expenseService.getExpenseSummary(category);
-
-    return res.status(200).json({
-        success: true,
-        data: summary
-    });
-}
-
-function deleteExpense(req, res) {
-    const deletedExpense = expenseService.deleteExpense(req.params.id);
-
-    if (!deletedExpense) {
-        return res.status(404).json({
-            success: false,
-            message: "Expense not found."
+        return res.status(201).json({
+            success: true,
+            message: "Expense added successfully.",
+            data: expense
         });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getExpenses(req, res, next) {
+
+    try {
+
+        const { category } = req.query;
+
+        const expenses = await expenseService.getExpenses(category);
+
+        return res.status(200).json({
+            success: true,
+            count: expenses.length,
+            data: expenses
+        });
+
+    } catch (error) {
+        next(error);
     }
 
-    return res.status(200).json({
-        success: true,
-        message: "Expense deleted successfully.",
-        data: deletedExpense
-    });
+}
+
+async function getExpenseSummary(req, res, next) {
+
+    try {
+
+        const { category } = req.query;
+
+        const summary = await expenseService.getExpenseSummary(category);
+
+        return res.status(200).json({
+            success: true,
+            message: "Expense summary fetched successfully.",
+            data: summary
+        });
+
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+async function deleteExpense(req, res, next) {
+
+    try {
+
+        const deletedExpense =
+    await expenseService.deleteExpense(req.params.id);
+
+        res.status(200).json({
+            success: true,
+            message: "Expense deleted successfully.",
+            data: deletedExpense
+        });
+
+    } catch (error) {
+
+        next(error);
+
+    }
+
 }
 
 module.exports = {

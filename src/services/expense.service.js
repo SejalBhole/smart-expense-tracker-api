@@ -1,13 +1,13 @@
 const { createExpense } = require("../models/expense.model");
 const expenseRepository = require("../repositories/expense.repository");
-
-function addExpense(expenseData) {
+const AppError = require("../utils/AppError");
+async function addExpense(expenseData) {
     const expense = createExpense(expenseData);
 
     return expenseRepository.addExpense(expense);
 }
 
-function getExpenses(category) {
+async function getExpenses(category) {
 
     if (category) {
         return expenseRepository.getExpensesByCategory(category);
@@ -16,7 +16,7 @@ function getExpenses(category) {
     return expenseRepository.getAllExpenses();
 }
 
-function getExpenseSummary(category) {
+async function getExpenseSummary(category) {
 
     if (category) {
         return {
@@ -30,8 +30,15 @@ function getExpenseSummary(category) {
     };
 }
 
-function deleteExpense(id) {
-    return expenseRepository.deleteExpense(id);
+async function deleteExpense(id) {
+
+    const deletedExpense = expenseRepository.deleteExpense(id);
+
+    if (!deletedExpense) {
+        throw new AppError("Expense not found.", 404);
+    }
+
+    return deletedExpense;
 }
 
 module.exports = {

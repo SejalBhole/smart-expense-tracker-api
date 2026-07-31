@@ -12,7 +12,7 @@ function addExpense(expense) {
  * Get all expenses
  */
 function getAllExpenses() {
-    return expenses;
+    return [...expenses];
 }
 
 /**
