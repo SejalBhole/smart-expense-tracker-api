@@ -1,5 +1,7 @@
 const express = require("express");
 const errorHandler = require("./middlewares/error.middleware");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 
 const expenseRoutes = require("./routes/expense.routes");
 
@@ -15,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/expenses", expenseRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(errorHandler);
 
 module.exports = app;

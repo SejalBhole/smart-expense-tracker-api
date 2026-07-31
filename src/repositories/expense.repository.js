@@ -64,11 +64,16 @@ function deleteExpense(id) {
     return expenses.splice(index, 1)[0];
 }
 
+function clearExpenses() {
+    expenses.length = 0;
+}
+
 module.exports = {
     addExpense,
     getAllExpenses,
     getExpensesByCategory,
     getTotalExpenses,
     getTotalByCategory,
-    deleteExpense
+    deleteExpense,
+    clearExpenses
 };
